@@ -24,8 +24,8 @@ class Draw(TypedDict):
     """Random inputs shared by the tests."""
 
     theta1: float | int
-    theta2: float| int
-    w: float| int
+    theta2: float | int
+    w: float | int
     x: NDArray[np.float64]
     q: NDArray[np.float64]
 
