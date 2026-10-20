@@ -5,3 +5,4 @@ API reference
    :maxdepth: 1
 
    stats
+   typing
