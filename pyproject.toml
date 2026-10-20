@@ -26,6 +26,9 @@ docs = [
     "sphinx",
     "pydata-sphinx-theme"
 ]
+all = [
+    "fcaz[dev, docs]"
+]
 
 [project.urls]
 Homepage = "https://github.com/casact/fcaz"
@@ -43,3 +46,59 @@ branch = true
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["docs/_build"]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "B",
+    "UP",
+    "NPY",
+    "SIM",
+    "RUF",
+    "D",
+    "D213",
+]
+ignore = ["D212"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.isort]
+known-first-party = ["fcaz"]
+force-sort-within-sections = false
+order-by-type = true
+combine-as-imports = false
+lines-after-imports = -1
+lines-between-types = 1
+split-on-trailing-comma = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
+"docs/conf.py" = ["D"]
+
+[tool.ruff.format]
+quote-style = "single"
+docstring-code-format = true
+
+[tool.setuptools.package-data]
+fcaz = ["py.typed"]
+
+[tool.pyright]
+include = ["fcaz", "tests"]
+exclude = ["docs/_build"]
+pythonVersion = "3.10"
+strict = ["fcaz"]
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+extraPaths = ["."]
+reportMissingParameterType = "error"
+reportMissingTypeArgument = "error"
