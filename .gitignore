@@ -1,9 +1,10 @@
 .idea/
-.venv/docs/_build/
-docs/api/generated/
+.venv/
+build/
+dist/
 docs/_build/
+docs/api/generated/
 *.egg-info/
 __pycache__/
 coverage.xml
 .coverage
-
