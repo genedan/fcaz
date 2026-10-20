@@ -23,6 +23,7 @@ dev = [
     "pyright",
     "pytest",
     "ruff",
+    "scipy-stubs",
     "twine"
 ]
 docs = [
