@@ -208,7 +208,7 @@ class Mixture:
         )
         if len(dists) != len(w):
             raise ValueError('dists and weights must have the same length')
-        if np.any(w < 0) or not math.isclose(
+        if bool(w.min() < 0) or not math.isclose(
             float(w.sum()),
             1.0,
             rel_tol=1e-5,
@@ -340,13 +340,9 @@ class Mixture:
         """Random variates; ``size`` and ``random_state`` as in scipy."""
         rng = np.random.default_rng(random_state)
         n = 1 if size is None else int(np.prod(size))
-        edges = np.cumsum(self.weights)
+        edges = self.weights.cumsum()
         which = np.minimum(
-            np.searchsorted(
-                edges,
-                rng.random(n),
-                side='right',
-            ),
+            (rng.random(n)[:, None] >= edges).sum(axis=1),
             len(self.dists) - 1,
         )
         out: NDArray[np.float64] = np.empty(n)
@@ -366,4 +362,4 @@ class Mixture:
             )
             else size
         )
-        return out.reshape(shape)
+        return out.reshape(shape)  # pyright: ignore[reportUnknownMemberType]
